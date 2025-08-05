@@ -2,3 +2,5 @@
 .idea/inspectionProfiles/
 
 .idea/
+
+frontend/package-lock.json
