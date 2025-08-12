@@ -221,13 +221,16 @@ export const GameLogic = {
 
             const apiPayload = GameLogic.formatHandForApi(newState);
             apiService.saveHand(apiPayload)
-                .then(response => newState.log.push(`Hand #${response.id} saved.`))
+                .then(savedHand =>{
+                    newState.log.push(`Hand #${savedHand.id} saved.`);
+                })
                 .catch(err => newState.log.push(`Error saving hand: ${err.message}`));
 
             if (winner) {
-                newState.log.push(`${winner.name} wins the pot of ${newState.pot}.`);
+                // newState.log.push(`${winner.name} wins the pot of ${newState.pot}.`);
                 winner.stack += newState.pot;
             }
+            newState.log.push(`Final pot was ${newState.pot}.`);
             newState.log.push(`--- Hand Over ---`);
             newState.isHandInProgress = false;
             newState.currentTurnPlayerId = null;
