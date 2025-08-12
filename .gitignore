@@ -4,3 +4,13 @@
 .idea/
 
 frontend/package-lock.json
+
+backend/poker_api/services/__pycache__/
+
+backend/poker_api/repositories/__pycache__/
+
+backend/__pycache__/
+
+backend/poker_api/__pycache__/
+
+backend/poker_api/models/__pycache__/
