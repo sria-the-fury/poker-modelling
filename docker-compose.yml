@@ -1,0 +1,38 @@
+
+services:
+  backend:
+    build: ./backend
+    container_name: poker-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_HOST=db
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+  db:
+    image: postgres:15-alpine
+    container_name: poker-db
+    restart: always
+    environment:
+      - POSTGRES_USER=pokeruser
+      - POSTGRES_PASSWORD=pokerpass
+      - POSTGRES_DB=pokerdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  frontend:
+    build: ./frontend
+    container_name: poker-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - WATCHPACK_POLLING=true
+
+volumes:
+  postgres_data:
